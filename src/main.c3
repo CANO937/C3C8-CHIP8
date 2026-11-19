@@ -373,18 +373,18 @@ fn void decodeExecute(Chip8Context* context) {
 fn bool loadRom(String filename, Chip8Context* context) {
 	File? fl = file::open(filename, "rb");
 	if (catch error = fl) {
-		io::printfn("Errore apertura file '%s': %s", filename, error);
+		io::printfn("Error '%s': %s", filename, error);
 		return false;
 	}
 	defer (void)fl.close();
 
 	sz? fileRead = fl.read(context.memory[0x200..]);
 	if (catch error = fileRead) {
-        io::printfn("Errore lettura ROM: %s", error);
+        io::printfn("Errore: %s", error);
         return false;
 	}
 
-    io::printfn("ROM caricata con successo (%d byte).", fileRead);
+    io::printfn("ROM: (%d byte).", fileRead);
     return true;	
 }
 
